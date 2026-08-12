@@ -7,7 +7,51 @@
 <!-- * * * * * * * to get started with your project! * * * * * * * -->
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
 
+<main class="relative w-full min-h-screen flex flex-col">
 
+    <img src="./images/bg-desktop-light.jpg" alt="banner">
+
+    <div class="absolute w-[40%] h-auto flex flex-col justify-between items-center top-1/4 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+
+        <div class="w-full h-20 flex flex-row justify-between items-center mb-4">
+            <p class="text-[40px] font-josefin-sans uppercase font-semibold tracking-[1rem] text-[var(--light-gray-300)]">todo</p>
+            <button class="w-[30px] h-[30px] cursor-pointer">
+                <img src="./images/icon-moon.svg" alt="icon">
+            </button>
+        </div>
+
+        <div class="w-full h-20">
+            <input type="text" placeholder="Create a new todo" class="w-full bg-[var(--light-gray-300)] text-[var(--light-navy-850)] focus:outline-none rounded cursor-pointer px-8 py-4 mb-4">
+        </div>
+
+        <ul class="w-full h-auto flex flex-col justify-around rounded bg-[var(--light-gray-300)] text-[var(--light-navy-850)] px-4 py-4">
+            <li class="w-full mb-6">
+                <div class="flex justify-center items-center w-[26px] h-[26px] rounded-full cursor-pointer" style="background: var(--bg-color);">
+                    <img src="./images/icon-check.svg" alt="check icon" class="w-[14px] h-[14px]">
+                </div>
+            </li>
+            
+            <li class="w-full mb-6">
+                <div class="flex justify-center items-center w-[26px] h-[26px] rounded-full cursor-pointer" style="background: var(--bg-color);">
+                    <img src="./images/icon-check.svg" alt="check icon" class="w-[14px] h-[14px]">
+                </div>
+            </li>
+
+            <li class="w-full mb-6">
+                <div class="flex justify-center items-center w-[26px] h-[26px] rounded-full cursor-pointer" style="background: var(--bg-color);">
+                    <img src="./images/icon-check.svg" alt="check icon" class="w-[14px] h-[14px]">
+                </div>
+            </li>
+
+            <li class="w-full mb-6">
+                <div class="flex justify-center items-center w-[26px] h-[26px] rounded-full cursor-pointer" style="background: var(--bg-color);">
+                    <img src="./images/icon-check.svg" alt="check icon" class="w-[14px] h-[14px]">
+                </div>
+            </li>
+        </ul>
+    </div>
+
+</main>
 
 
 <router-outlet></router-outlet>
