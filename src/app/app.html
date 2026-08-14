@@ -21,33 +21,20 @@
         </div>
 
         <div class="w-full h-20">
-            <input type="text" placeholder="Create a new todo" class="w-full bg-[var(--light-gray-300)] text-[var(--light-navy-850)] focus:outline-none rounded cursor-pointer px-8 py-4 mb-4">
+            <input type="text" placeholder="Create a new todo" class="w-full bg-[var(--light-gray-300)] text-[var(--light-navy-850)] focus:outline-none rounded cursor-pointer px-8 py-4 mb-4"
+            #input (keydown.enter)="addTodo(input.value); input.value = '' ">
         </div>
 
         <ul class="w-full h-auto flex flex-col justify-around rounded bg-[var(--light-gray-300)] text-[var(--light-navy-850)] px-4 py-4">
-            <li class="w-full mb-6">
+            <li class="w-full">
                 <div class="flex justify-center items-center w-[26px] h-[26px] rounded-full cursor-pointer" style="background: var(--bg-color);">
                     <img src="./images/icon-check.svg" alt="check icon" class="w-[14px] h-[14px]">
                 </div>
             </li>
             
-            <li class="w-full mb-6">
-                <div class="flex justify-center items-center w-[26px] h-[26px] rounded-full cursor-pointer" style="background: var(--bg-color);">
-                    <img src="./images/icon-check.svg" alt="check icon" class="w-[14px] h-[14px]">
-                </div>
-            </li>
-
-            <li class="w-full mb-6">
-                <div class="flex justify-center items-center w-[26px] h-[26px] rounded-full cursor-pointer" style="background: var(--bg-color);">
-                    <img src="./images/icon-check.svg" alt="check icon" class="w-[14px] h-[14px]">
-                </div>
-            </li>
-
-            <li class="w-full mb-6">
-                <div class="flex justify-center items-center w-[26px] h-[26px] rounded-full cursor-pointer" style="background: var(--bg-color);">
-                    <img src="./images/icon-check.svg" alt="check icon" class="w-[14px] h-[14px]">
-                </div>
-            </li>
+            @for (item of todoList; track $index) {
+                <li class="px-4 py-4">{{ item }}</li>
+            }
         </ul>
     </div>
 
