@@ -1,5 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;500;700&display=swap');
 @import 'tailwindcss';
 
 
@@ -27,13 +28,10 @@
 }
 
 @layer base {
-    body {
+    html, body {
         @apply text-lg;
+        font-family: "Josefin Sans", sans-serif;
+        font-optical-sizing: auto;
+        font-style: normal;
     }
-}
-
-.font-josefin-sans {
-  font-family: "Josefin Sans", sans-serif;
-  font-optical-sizing: auto;
-  font-style: normal;
 }

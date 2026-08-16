@@ -11,10 +11,10 @@
 
     <img src="./images/bg-desktop-light.jpg" alt="banner">
 
-    <div class="absolute w-[40%] h-auto flex flex-col justify-between items-center top-1/4 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+    <div class="absolute w-[40%] h-auto flex flex-col justify-between items-center top-6 left-1/2 -translate-x-1/2">
 
         <div class="w-full h-20 flex flex-row justify-between items-center mb-4">
-            <p class="text-[40px] font-josefin-sans uppercase font-semibold tracking-[1rem] text-[var(--light-gray-300)]">todo</p>
+            <p class="text-[40px] uppercase font-semibold tracking-[1rem] text-[var(--light-gray-300)]">todo</p>
             <button class="w-[30px] h-[30px] cursor-pointer">
                 <img src="./images/icon-moon.svg" alt="icon">
             </button>
@@ -32,8 +32,24 @@
                 </div>
             </li>
             
-            @for (item of todoList; track $index) {
-                <li class="px-4 py-4">{{ item }}</li>
+            @for (item of todoList; track $index; let i = $index) {
+                <div 
+                class="flex items-center py-4"
+                (mouseenter)="HoverIndex = i"
+                (mouseleave)="HoverIndex = null"
+                >
+                    <div class="flex justify-center items-center w-[26px] h-[26px] rounded-full cursor-pointer bg-[var(--light-purple-500)]" >
+                        <img src="./images/icon-check.svg" alt="check icon" class="w-[14px] h-[14px]">
+                    </div>
+                    <li class="text-base ps-8">{{ item }}</li>
+                    @if (HoverIndex === i) {
+                        <div 
+                        class="flex justify-center items-center w-[26px] h-[26px] cursor-pointer ms-auto"
+                        >
+                            <img src="./images/icon-cross.svg" alt="delete">
+                        </div>
+                    }
+                </div>
             }
         </ul>
     </div>
