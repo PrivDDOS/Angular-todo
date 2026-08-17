@@ -38,7 +38,11 @@
                 (mouseenter)="HoverIndex = i"
                 (mouseleave)="HoverIndex = null"
                 >
-                    <div class="flex justify-center items-center w-[26px] h-[26px] rounded-full cursor-pointer bg-[var(--light-purple-500)]" >
+                    <div 
+                    (click)="toggleCheck()"
+                    class="flex justify-center items-center w-[26px] h-[26px] rounded-full cursor-pointer hover:border-1" 
+                    [ngClass]="isClick ?  'check-bg' : 'bg-[var(--light-purple-500)]' "
+                    >
                         <img src="./images/icon-check.svg" alt="check icon" class="w-[14px] h-[14px]">
                     </div>
                     <li class="text-base ps-8">{{ item }}</li>

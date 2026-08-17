@@ -35,3 +35,7 @@
         font-style: normal;
     }
 }
+
+.check-bg {
+    background: linear-gradient(45deg, hsl(192, 100%, 67%), hsl(280, 87%, 65%))
+}
