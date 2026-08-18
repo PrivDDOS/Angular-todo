@@ -39,22 +39,37 @@
                 (mouseleave)="HoverIndex = null"
                 >
                     <div 
-                    (click)="toggleCheck()"
+                    (click)="toggleCheck(i)"
                     class="flex justify-center items-center w-[26px] h-[26px] rounded-full cursor-pointer hover:border-1" 
-                    [ngClass]="isClick ?  'check-bg' : 'bg-[var(--light-purple-500)]' "
+                    [ngClass]="item.checked ?  'check-bg' : 'bg-[var(--light-purple-500)]' "
                     >
                         <img src="./images/icon-check.svg" alt="check icon" class="w-[14px] h-[14px]">
                     </div>
-                    <li class="text-base ps-8">{{ item }}</li>
-                    @if (HoverIndex === i) {
+                    <li class="text-base text-[var(--light-navy-850)] ps-8">{{ item.text }}</li>
+                    @if (HoverIndex === i && item.checked !== false) {
                         <div 
                         class="flex justify-center items-center w-[26px] h-[26px] cursor-pointer ms-auto"
+                        (click)="deleteTodo(i)"
                         >
                             <img src="./images/icon-cross.svg" alt="delete">
                         </div>
                     }
                 </div>
-            }
+
+            } 
+            <div class="flex items-center justify-between pe-4 py-4">
+
+                <p> items left</p>
+
+                <div class="flex justify-around">
+                    <button>All</button>
+                    <button>Active</button>
+                    <button>Completed</button>
+                </div>
+
+                <button>Clear Completed</button>
+
+            </div>
         </ul>
     </div>
 
