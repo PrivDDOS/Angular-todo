@@ -32,24 +32,23 @@
                 </div>
             </li>
             
-            @for (item of todoList; track $index; let i = $index) {
+            @for (item of filteredTodo; track $index) {
                 <div 
                 class="flex items-center py-4"
-                (mouseenter)="HoverIndex = i"
+                (mouseenter)="HoverIndex = $index"
                 (mouseleave)="HoverIndex = null"
                 >
-                    <div 
-                    (click)="toggleCheck(i)"
+                    <div
                     class="flex justify-center items-center w-[26px] h-[26px] rounded-full cursor-pointer hover:border-1" 
                     [ngClass]="item.checked ?  'check-bg' : 'bg-[var(--light-purple-500)]' "
                     >
                         <img src="./images/icon-check.svg" alt="check icon" class="w-[14px] h-[14px]">
                     </div>
                     <li class="text-base text-[var(--light-navy-850)] ps-8">{{ item.text }}</li>
-                    @if (HoverIndex === i && item.checked !== false) {
+                    @if (HoverIndex === $index) {
                         <div 
                         class="flex justify-center items-center w-[26px] h-[26px] cursor-pointer ms-auto"
-                        (click)="deleteTodo(i)"
+                        (click)="deleteTodo(item)"
                         >
                             <img src="./images/icon-cross.svg" alt="delete">
                         </div>
@@ -61,20 +60,26 @@
                 <div class="flex items-center justify-between pe-4 py-4">
                     
                     <p class="text-sm text-[var(--light-gray-600)]">
-                        {{ todoList.length }} items left
+                        {{ filteredTodo.length }} items left
                     </p>
     
                     <div class="w-50 flex justify-between">
                         <button 
-                        class="text-base text-[var(--light-gray-600)] hover:text-[var(--light-navy-850)] cursor-pointer">
+                        class="text-base text-[var(--light-gray-600)] hover:text-[var(--light-navy-850)] cursor-pointer"
+                        (click)="setFilter('all')"
+                        >
                             All
                         </button>
                         <button 
-                        class="text-base text-[var(--light-gray-600)] hover:text-[var(--light-navy-850)] cursor-pointer">
+                        class="text-base text-[var(--light-gray-600)] hover:text-[var(--light-navy-850)] cursor-pointer"
+                        (click)="setFilter('active')"
+                        >
                             Active
                         </button>
                         <button 
-                        class="text-base text-[var(--light-gray-600)] hover:text-[var(--light-navy-850)] cursor-pointer">
+                        class="text-base text-[var(--light-gray-600)] hover:text-[var(--light-navy-850)] cursor-pointer"
+                        (click)="setFilter('completed')"
+                        >
                             Completed
                         </button>
                     </div>

@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, signal} from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { NgClass } from '@angular/common';
 
@@ -6,6 +6,8 @@ type Todo = {
   text: string;
   checked: boolean;
 };
+
+type FilterTodo = 'all' | 'active' | 'completed';
 
 @Component({
   selector: 'app-root',
@@ -18,6 +20,7 @@ export class App {
   
   
   todoList: Todo[] = [];
+  currentFilter: FilterTodo = 'all';
   HoverIndex: number | null = null;
 
   addTodo(value: string) {
@@ -26,12 +29,26 @@ export class App {
     }
   }
   
-  toggleCheck(index: number): void {
-    this.todoList[index].checked = !this.todoList[index].checked;
+  deleteTodo(todo: Todo): void {
+    const todoIndex = this.todoList.indexOf(todo);
+    this.todoList.splice(todoIndex, 1);
   }
-  
-  deleteTodo(index: number): void {
-    this.todoList.splice(index, 1); // remove 1 item at index
+
+  // Filter All/Active/Completed function
+  setFilter(filter: FilterTodo) {
+    this.currentFilter = filter;
   }
-  
+
+  get filteredTodo(): Todo[] {
+    if(this.currentFilter === 'active') {
+      return this.todoList.filter(item => !item.checked)
+    }
+
+    if(this.currentFilter === 'completed') {
+      return this.todoList.filter(item => item.checked)
+    }
+
+    return this.todoList
+  }
+
 }
