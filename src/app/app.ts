@@ -17,16 +17,26 @@ type FilterTodo = 'all' | 'active' | 'completed';
 })
 export class App {
   protected readonly title = signal('angular-todo');
-  
+
+  isDark: boolean = false;
   
   todoList: Todo[] = [];
   currentFilter: FilterTodo = 'all';
   HoverIndex: number | null = null;
 
+  // Toggle light/dark mode
+  switchMode() {
+    this.isDark = !this.isDark
+  }
+
   addTodo(value: string) {
     if(value.trim()) {
       this.todoList.push({text: value, checked: false})
     }
+  }
+
+  toggleCheck(index: number): void {
+    this.todoList[index].checked = !this.todoList[index].checked;
   }
   
   deleteTodo(todo: Todo): void {
