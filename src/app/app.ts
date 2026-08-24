@@ -61,4 +61,9 @@ export class App {
     return this.todoList
   }
 
+  // Clear todo 
+  clearTodo() {
+    this.todoList = []
+  }
+
 }

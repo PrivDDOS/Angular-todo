@@ -13,12 +13,12 @@ class="relative w-full min-h-screen flex flex-col"
 >
 
     @if (isDark == false) {
-        <img src="./images/bg-desktop-light.jpg" alt="banner">
+        <img src="./images/bg-desktop-light.jpg" alt="banner" class="absolute top-0 left-0 w-full">
     } @else {
-        <img src="./images/bg-desktop-dark.jpg" alt="banner">
+        <img src="./images/bg-desktop-dark.jpg" alt="banner" class="absolute top-0 left-0 w-full">
     }
 
-    <div class="absolute w-[40%] h-auto flex flex-col justify-between items-center top-6 left-1/2 -translate-x-1/2">
+    <div class="relative z-10 w-[40%] h-auto flex flex-col justify-between items-center mx-auto pt-6">
 
         <div class="w-full h-20 flex flex-row justify-between items-center mb-4">
             <p class="text-[40px] uppercase font-semibold tracking-[1rem] text-[var(--light-gray-300)]">todo</p>
@@ -45,13 +45,19 @@ class="relative w-full min-h-screen flex flex-col"
         </div>
 
         <ul 
-        class="w-full h-auto flex flex-col justify-around rounded px-4 py-4"
+        class="w-full h-auto flex flex-col justify-around rounded px-4"
         [ngClass]="isDark ? 'bg-[var(--dark-navy-900)] text-[var(--dark-purple-300)]' : 'bg-[var(--light-gray-300)] text-[var(--light-navy-850)]' "
         >
-            <li class="w-full">
+            <li class="w-full flex flex-row text-center items-center py-4">
                 <div class="flex justify-center items-center w-[26px] h-[26px] rounded-full cursor-pointer" style="background: var(--bg-color);">
                     <img src="./images/icon-check.svg" alt="check icon" class="w-[14px] h-[14px]">
                 </div>
+                <p 
+                class="text-base ps-8 line-through"
+                [ngClass]="isDark ? 'text-[var(--dark-purple-700)]' : 'text-[var(--light-gray)]' "
+                >
+                    Complete online JavaScript course
+                </p>
             </li>
             
             @for (item of filteredTodo; track $index) {
@@ -60,6 +66,7 @@ class="relative w-full min-h-screen flex flex-col"
                 (click)="toggleCheck($index)"
                 (mouseenter)="HoverIndex = $index"
                 (mouseleave)="HoverIndex = null"
+                [ngClass]="isDark ? 'border-t-1 border-b-1 border-solid border-[var(--dark-purple-700)]' : '' "
                 >
                     <div
                     class="flex justify-center items-center w-[26px] h-[26px] rounded-full cursor-pointer hover:border-1" 
@@ -67,7 +74,9 @@ class="relative w-full min-h-screen flex flex-col"
                         item.checked ?  'check-bg' : '', 
                         isDark ? 'bg-[var(--dark-navy-900)]' : 'bg-[var(--light-purple-500)]' ]"
                     >
-                        <img src="./images/icon-check.svg" alt="check icon" class="w-[14px] h-[14px]">
+                        @if (item.checked) {
+                            <img src="./images/icon-check.svg" alt="check icon" class="w-[14px] h-[14px]">
+                        }
                     </div>
                     <li 
                     class="text-base ps-8"
@@ -95,19 +104,31 @@ class="relative w-full min-h-screen flex flex-col"
     
                     <div class="w-50 flex justify-between">
                         <button 
-                        class="text-base text-[var(--light-gray-600)] hover:text-[var(--light-navy-850)] cursor-pointer"
+                        class="text-base cursor-pointer"
+                        [ngClass]="[
+                            currentFilter === 'all' ? 'text-[var(--main-blue)]' : 'text-[var(--light-gray-600)]',
+                            isDark ? 'hover:text-[var(--dark-purple-100)]' : 'hover:text-[var(--light-navy-850)]'
+                        ]"
                         (click)="setFilter('all')"
                         >
                             All
                         </button>
                         <button 
-                        class="text-base text-[var(--light-gray-600)] hover:text-[var(--light-navy-850)] cursor-pointer"
+                        class="text-base cursor-pointer"
+                        [ngClass]="[
+                            currentFilter === 'active' ? 'text-[var(--main-blue)]' : 'text-[var(--light-gray-600)]',
+                            isDark ? 'hover:text-[var(--dark-purple-100)]' : 'hover:text-[var(--light-navy-850)]'
+                        ]"
                         (click)="setFilter('active')"
                         >
                             Active
                         </button>
                         <button 
-                        class="text-base text-[var(--light-gray-600)] hover:text-[var(--light-navy-850)] cursor-pointer"
+                        class="text-base cursor-pointer"
+                        [ngClass]="[
+                            currentFilter === 'completed' ? 'text-[var(--main-blue)]' : 'text-[var(--light-gray-600)]',
+                            isDark ? 'hover:text-[var(--dark-purple-100)]' : 'hover:text-[var(--light-navy-850)]'
+                        ]"
                         (click)="setFilter('completed')"
                         >
                             Completed
@@ -116,7 +137,9 @@ class="relative w-full min-h-screen flex flex-col"
     
                     <button 
                     class="text-sm text-[var(--light-gray-600)]
-                    hover:text-[var(--light-navy-850)] cursor-pointer"
+                    cursor-pointer"
+                    [ngClass]="isDark ? 'hover:text-[var(--dark-purple-100)]' : 'hover:text-[var(--light-navy-850)]' "
+                    (click)="clearTodo()"
                     >
                         Clear Completed
                     </button>
