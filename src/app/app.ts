@@ -1,6 +1,7 @@
 import { Component, signal} from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { NgClass } from '@angular/common';
+import {CdkDrag, CdkDragDrop, CdkDropList, moveItemInArray} from '@angular/cdk/drag-drop';
 
 type Todo = {
   text: string;
@@ -11,7 +12,7 @@ type FilterTodo = 'all' | 'active' | 'completed';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, NgClass],
+  imports: [RouterOutlet, NgClass, CdkDrag, CdkDropList],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
@@ -64,6 +65,11 @@ export class App {
   // Clear todo 
   clearTodo() {
     this.todoList = []
+  }
+
+  // Drag and drop
+  dragAndDrop(event: CdkDragDrop<Todo[]>) {
+    moveItemInArray(this.todoList, event.previousIndex, event.currentIndex)
   }
 
 }

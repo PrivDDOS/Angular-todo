@@ -39,3 +39,21 @@
 .check-bg {
     background: linear-gradient(45deg, hsl(192, 100%, 67%), hsl(280, 87%, 65%))
 }
+
+.hover-border {
+    position: relative;
+    border: 1px solid transparent;
+}
+
+.hover-border:hover::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    padding: 1px;
+    border-radius: inherit;
+    background: var(--bg-color);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+}

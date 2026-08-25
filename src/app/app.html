@@ -47,6 +47,8 @@ class="relative w-full min-h-screen flex flex-col"
         <ul 
         class="w-full h-auto flex flex-col justify-around rounded px-4"
         [ngClass]="isDark ? 'bg-[var(--dark-navy-900)] text-[var(--dark-purple-300)]' : 'bg-[var(--light-gray-300)] text-[var(--light-navy-850)]' "
+        cdkDropList
+        (cdkDropListDropped)="dragAndDrop($event)"
         >
             <li class="w-full flex flex-row text-center items-center py-4">
                 <div class="flex justify-center items-center w-[26px] h-[26px] rounded-full cursor-pointer" style="background: var(--bg-color);">
@@ -67,12 +69,13 @@ class="relative w-full min-h-screen flex flex-col"
                 (mouseenter)="HoverIndex = $index"
                 (mouseleave)="HoverIndex = null"
                 [ngClass]="isDark ? 'border-t-1 border-b-1 border-solid border-[var(--dark-purple-700)]' : '' "
+                cdkDrag
                 >
                     <div
                     class="flex justify-center items-center w-[26px] h-[26px] rounded-full cursor-pointer hover:border-1" 
                     [ngClass]="[
                         item.checked ?  'check-bg' : '', 
-                        isDark ? 'bg-[var(--dark-navy-900)]' : 'bg-[var(--light-purple-500)]' ]"
+                        isDark ? 'bg-[var(--dark-navy-900)] hover-border' : 'bg-[var(--light-purple-500)]' ]"
                     >
                         @if (item.checked) {
                             <img src="./images/icon-check.svg" alt="check icon" class="w-[14px] h-[14px]">
@@ -147,6 +150,16 @@ class="relative w-full min-h-screen flex flex-col"
                 </div>
             }
         </ul>
+
+        <div class="pt-6">
+            <p 
+            class="text-xs font-thin"
+            [ngClass]="isDark ? 'text-[var(--dark-purple-600)]' : 'text-[var(--light-navy-850)]' "
+            >
+                Drag and drop to reorder list
+            </p>
+        </div>
+
     </div>
 
 </main>
