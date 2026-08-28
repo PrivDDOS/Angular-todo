@@ -83,7 +83,14 @@ class="relative w-full min-h-screen flex flex-col"
                     </div>
                     <li 
                     class="text-base ps-8"
-                    [ngClass]="isDark ? 'text-[var(--dark-purple-300)]' : 'text-[var(--light-navy-850)]' "
+                    [ngClass]="[
+                        isDark ? 'text-[var(--dark-purple-300)]' : '' ,
+                        item.checked
+                            ? isDark
+                                ? 'line-through text-[var(--dark-purple-700)]'
+                                : 'line-through text-[var(--light-gray)]'
+                            : 'no-underline'
+                    ]"
                     >
                         {{ item.text }}
                     </li>
