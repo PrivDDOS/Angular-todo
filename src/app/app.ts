@@ -20,6 +20,8 @@ export class App {
   protected readonly title = signal('angular-todo');
 
   isDark: boolean = false;
+  desktopHeight = 1080;
+  mobileHeight = 768;
   
   todoList: Todo[] = [];
   currentFilter: FilterTodo = 'all';
@@ -71,5 +73,6 @@ export class App {
   dragAndDrop(event: CdkDragDrop<Todo[]>) {
     moveItemInArray(this.todoList, event.previousIndex, event.currentIndex)
   }
+
 
 }
