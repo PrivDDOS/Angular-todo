@@ -1,4 +1,4 @@
-import { Component, afterNextRender ,signal} from '@angular/core';
+import { Component, afterNextRender, ChangeDetectorRef ,signal} from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { NgClass } from '@angular/common';
 import {CdkDrag, CdkDragDrop, CdkDropList, moveItemInArray} from '@angular/cdk/drag-drop';
@@ -39,9 +39,10 @@ export class App {
   }
 
   // localStorage
-  constructor() {
+  constructor(private cdr: ChangeDetectorRef) {
     afterNextRender(() => {
       this.loadTodos();
+      this.cdr.detectChanges();
     });
   }
 
