@@ -58,8 +58,8 @@
                 </p>
             </li>
 
-            @for (item of filteredTodo; track $index) {
-            <div class="flex items-center py-4" (click)="toggleCheck($index)" (mouseenter)="HoverIndex = $index"
+            @for (item of filteredTodo; track item.text) {
+            <div class="flex items-center py-4" (click)="toggleCheck(item)" (mouseenter)="HoverIndex = $index"
                 (mouseleave)="HoverIndex = null" [ngClass]="
             isDark ? 'border-t-1 border-b-1 border-solid border-[var(--dark-purple-700)]' : ''
           " cdkDrag>
@@ -84,7 +84,7 @@
                 </li>
                 @if (HoverIndex === $index) {
                 <div class="flex justify-center items-center w-[26px] h-[26px] cursor-pointer ms-auto"
-                    (click)="deleteTodo(item)">
+                    (click)="deleteTodo(item); $event.stopPropagation()">
                     <img src="./images/icon-cross.svg" alt="delete" />
                 </div>
                 }

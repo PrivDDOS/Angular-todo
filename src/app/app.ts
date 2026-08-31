@@ -1,4 +1,4 @@
-import { Component, signal} from '@angular/core';
+import { Component, afterNextRender ,signal} from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { NgClass } from '@angular/common';
 import {CdkDrag, CdkDragDrop, CdkDropList, moveItemInArray} from '@angular/cdk/drag-drop';
@@ -20,8 +20,6 @@ export class App {
   protected readonly title = signal('angular-todo');
 
   isDark: boolean = false;
-  desktopHeight = 1080;
-  mobileHeight = 768;
   
   todoList: Todo[] = [];
   currentFilter: FilterTodo = 'all';
@@ -35,16 +33,49 @@ export class App {
   addTodo(value: string) {
     if(value.trim()) {
       this.todoList.push({text: value, checked: false})
+
+      this.saveTodos()
     }
   }
 
-  toggleCheck(index: number): void {
-    this.todoList[index].checked = !this.todoList[index].checked;
+  // localStorage
+  constructor() {
+    afterNextRender(() => {
+      this.loadTodos();
+    });
   }
-  
+
+
+  saveTodos() {
+    localStorage.setItem('todos', JSON.stringify(this.todoList))
+  }
+
+  loadTodos() {
+    const localSaved = localStorage.getItem('todos');
+
+    if(localSaved) {
+      this.todoList = JSON.parse(localSaved)
+    }
+
+  }
+
+  // function for Todolist
+  toggleCheck(todo: Todo): void {
+    const todoIndex = this.todoList.indexOf(todo);
+
+    if (todoIndex !== -1) {
+      this.todoList[todoIndex].checked = !this.todoList[todoIndex].checked;
+      this.saveTodos();
+    }
+  }
+
   deleteTodo(todo: Todo): void {
     const todoIndex = this.todoList.indexOf(todo);
-    this.todoList.splice(todoIndex, 1);
+
+    if (todoIndex !== -1) {
+      this.todoList.splice(todoIndex, 1);
+      this.saveTodos();
+    }
   }
 
   // Filter All/Active/Completed function
@@ -66,7 +97,8 @@ export class App {
 
   // Clear todo 
   clearTodo() {
-    this.todoList = []
+    this.todoList = [];
+    this.saveTodos();
   }
 
   // Drag and drop
