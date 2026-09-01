@@ -43,10 +43,7 @@
         isDark
           ? 'bg-[var(--dark-navy-900)] text-[var(--dark-purple-300)]'
           : 'bg-[var(--light-gray-300)] text-[var(--light-navy-850)]'
-        " 
-        cdkDropList 
-        (cdkDropListDropped)="dragAndDrop($event)"
-        >
+        " cdkDropList (cdkDropListDropped)="dragAndDrop($event)">
             <li class="w-full flex flex-row text-center items-center py-4">
                 <div class="flex justify-center items-center w-[26px] h-[26px] rounded-full cursor-pointer"
                     style="background: var(--bg-color)">
@@ -136,14 +133,11 @@
             }
         </ul>
 
-        <div 
-        class="w-full flex items-center justify-center md:hidden py-3 my-4 rounded"
-        [ngClass]="
+        <div class="w-full flex items-center justify-center md:hidden py-3 my-4 rounded" [ngClass]="
             isDark
             ? 'bg-[var(--dark-navy-900)] text-[var(--dark-purple-300)]'
             : 'bg-[var(--light-gray-300)] text-[var(--light-navy-850)]'
-        "
-        >
+        ">
             <button class="text-base cursor-pointer pe-2" [ngClass]="[
               currentFilter === 'all' ? 'text-[var(--main-blue)]' : 'text-[var(--light-gray-600)]',
               isDark ? 'hover:text-[var(--dark-purple-100)]' : 'hover:text-[var(--light-navy-850)]',

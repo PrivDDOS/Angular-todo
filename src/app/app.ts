@@ -1,7 +1,7 @@
-import { Component, afterNextRender, ChangeDetectorRef ,signal} from '@angular/core';
+import { Component, afterNextRender, ChangeDetectorRef, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { NgClass } from '@angular/common';
-import {CdkDrag, CdkDragDrop, CdkDropList, moveItemInArray} from '@angular/cdk/drag-drop';
+import { CdkDrag, CdkDragDrop, CdkDropList, moveItemInArray } from '@angular/cdk/drag-drop';
 
 type Todo = {
   text: string;
@@ -14,27 +14,27 @@ type FilterTodo = 'all' | 'active' | 'completed';
   selector: 'app-root',
   imports: [RouterOutlet, NgClass, CdkDrag, CdkDropList],
   templateUrl: './app.html',
-  styleUrl: './app.css'
+  styleUrl: './app.css',
 })
 export class App {
   protected readonly title = signal('angular-todo');
 
   isDark: boolean = false;
-  
+
   todoList: Todo[] = [];
   currentFilter: FilterTodo = 'all';
   HoverIndex: number | null = null;
 
   // Toggle light/dark mode
   switchMode() {
-    this.isDark = !this.isDark
+    this.isDark = !this.isDark;
   }
 
   addTodo(value: string) {
-    if(value.trim()) {
-      this.todoList.push({text: value, checked: false})
+    if (value.trim()) {
+      this.todoList.push({ text: value, checked: false });
 
-      this.saveTodos()
+      this.saveTodos();
     }
   }
 
@@ -46,18 +46,16 @@ export class App {
     });
   }
 
-
   saveTodos() {
-    localStorage.setItem('todos', JSON.stringify(this.todoList))
+    localStorage.setItem('todos', JSON.stringify(this.todoList));
   }
 
   loadTodos() {
     const localSaved = localStorage.getItem('todos');
 
-    if(localSaved) {
-      this.todoList = JSON.parse(localSaved)
+    if (localSaved) {
+      this.todoList = JSON.parse(localSaved);
     }
-
   }
 
   // function for Todolist
@@ -85,18 +83,18 @@ export class App {
   }
 
   get filteredTodo(): Todo[] {
-    if(this.currentFilter === 'active') {
-      return this.todoList.filter(item => !item.checked)
+    if (this.currentFilter === 'active') {
+      return this.todoList.filter((item) => !item.checked);
     }
 
-    if(this.currentFilter === 'completed') {
-      return this.todoList.filter(item => item.checked)
+    if (this.currentFilter === 'completed') {
+      return this.todoList.filter((item) => item.checked);
     }
 
-    return this.todoList
+    return this.todoList;
   }
 
-  // Clear todo 
+  // Clear todo
   clearTodo() {
     this.todoList = [];
     this.saveTodos();
@@ -104,8 +102,6 @@ export class App {
 
   // Drag and drop
   dragAndDrop(event: CdkDragDrop<Todo[]>) {
-    moveItemInArray(this.todoList, event.previousIndex, event.currentIndex)
+    moveItemInArray(this.todoList, event.previousIndex, event.currentIndex);
   }
-
-
 }
